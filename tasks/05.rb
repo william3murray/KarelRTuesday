@@ -20,7 +20,7 @@ def task()
   world.read_world("../worlds/map.05a")
   
   karel = MonRobot.new(4, 3, Robota::EAST, 28)
-  karel.map.05a
+  karel.
   
 end
 

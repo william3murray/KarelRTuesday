@@ -1,10 +1,13 @@
 require_relative "../karel/ur_robot"
 require_relative "../mixins/will_module"
+require_relative "../mixins/move_module"
 
 class WillRobot < UrRobot
 	include WillModule
-
-	def turn_right
+  
+  include MoveModule
+	
+  def turn_right
 		turn_left
 		turn_left
 		turn_left
