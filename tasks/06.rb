@@ -2,64 +2,72 @@ $graphical = true
 
 require_relative "will_robot"
 require_relative "../karel/robota"
-  class Ecrivian < will_robot
 
+class Ecrivian < UrRobot
+  include WillModule
 
-  class EcrivianDeH < Ecrivian
-    def ecrit_lettre
-     5.times do
-       move
-      put_beeper
-      end
-     turn_right
-      move3
-      turn_right
-     5.times do
-      move
-      put_beeper
-     end
-      turn_right
-     move
-      turn_right
-      move2
-      put_beeper
-      turn_left
-     move
-     put_beeper
-     turn_left
-     move4
-    end
+  def ecrit_lettre
+    raise NotImplementedError.new("die")
   end
 
-  class EcrivianDeE < Ecrivian
-    def ecrit_lettre
+end
+
+class EcrivianDeH < Ecrivian
+  def ecrit_lettre
     5.times do
-      move
-      put_beeper
+     move
+     put_beeper
+    end
+    turn_right
+    move3
+    turn_right
+    5.times do
+     move
+     put_beeper
     end
     turn_right
     move
-    put_beeper
-    move
-    put_beeper
     turn_right
-    move2
-    put_beeper
-    turn_right
-    move
-    put_beeper
-    turn_left
     move2
     put_beeper
     turn_left
     move
     put_beeper
-    turn_right
+    turn_left
     move4
   end
 end
+
+class EcrivianDeE < Ecrivian
+  def ecrit_lettre
+   5.times do
+    move
+    put_beeper
+    end
+   turn_right
+   move
+   put_beeper
+   move
+   put_beeper
+   turn_right
+   move2
+   put_beeper
+   turn_right
+   move
+   put_beeper
+   turn_left
+   move2
+   put_beeper
+   turn_left
+   move
+   put_beeper
+   turn_right
+   move4
+  end
+end
   
-  class EcrivianDeL < Ecrivian
+class EcrivianDeL < Ecrivian
+  def ecrit_lettre
     move
     put_beeper
     turn_left
@@ -71,9 +79,10 @@ end
     4.times do 
       move
       put_beeper
-    end
-  end
-  class EcrivianDeO < Ecrivian
+     end
+end
+class EcrivianDeO < Ecrivian
+  def ecrit_lettre
     move
     put_beeper
     turn_left
@@ -96,6 +105,7 @@ end
       put_beeper
     end
   end
+end
 
 
 def task()
@@ -108,10 +118,10 @@ def task()
   karel4 = EcrivianDeL.new(2, 17, Robota::NORTH, 7)
   karel5 = EcrivianDeO.new(2, 20, Robota::NORTH, 12)
   karel.ecrit_lettre
-  kare2.ecrit_lettre
-  kare3.ecrit_lettre
-  kare4.ecrit_lettre
-  kare5.ecrit_lettre
+  karel2.ecrit_lettre
+  karel3.ecrit_lettre
+  karel4.ecrit_lettre
+  karel5.ecrit_lettre
 end
 
 if __FILE__ == $0
@@ -123,4 +133,5 @@ if __FILE__ == $0
    else
      task
    end
+  end
 end
