@@ -1,10 +1,11 @@
 require_relative "../karel/ur_robot"
 require_relative "../mixins/will_module"
 require_relative "../mixins/move_module"
+require_relative "../mixins/sensor_pack" 
 
 class WillRobot < UrRobot
 	include WillModule
-  
+  include SensorPack
   include MoveModule
 	
   def turn_right
@@ -275,7 +276,28 @@ class WillRobot < UrRobot
     move
     turn_right
   end
-
+  
+ def crawl
+    80.times do 
+      unless front_is_clear?
+        if facing_west
+          turn_right
+          move
+          turn_right
+        else
+          if facing_east
+            turn_left
+            move
+            turn_left
+          end
+        end
+        move
+        if next_to_a_beeper?
+          pick_beeper
+        end
+      end
+    end
+  end
 
 
 
